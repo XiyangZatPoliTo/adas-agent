@@ -1,0 +1,32 @@
+{
+  "C1A01": {
+    "description": "前向毫米波雷达通信丢失",
+    "affected_functions": ["ACC", "AEB"],
+    "severity": "high",
+    "typical_causes": ["雷达线束接触不良", "雷达供电异常", "CAN 总线通信故障"]
+  },
+  "C1A02": {
+    "description": "前向摄像头视野被遮挡",
+    "affected_functions": ["LKA", "LDW", "AEB"],
+    "severity": "medium",
+    "typical_causes": ["挡风玻璃脏污", "摄像头区域结冰或起雾", "异物遮挡"]
+  },
+  "C1A03": {
+    "description": "前向摄像头标定参数超出范围",
+    "affected_functions": ["LKA", "ACC"],
+    "severity": "medium",
+    "typical_causes": ["更换挡风玻璃后未重新标定", "摄像头支架松动", "碰撞导致安装角度偏移"]
+  },
+  "C1B01": {
+    "description": "毫米波雷达探测能力受限(疑似遮挡)",
+    "affected_functions": ["ACC", "AEB"],
+    "severity": "medium",
+    "typical_causes": ["保险杠区域积雪或泥污", "雷达罩表面金属漆或贴膜", "雨雪天气衰减"]
+  },
+  "U0100": {
+    "description": "与发动机控制模块通信丢失",
+    "affected_functions": ["ACC"],
+    "severity": "high",
+    "typical_causes": ["CAN 总线物理故障", "ECM 供电异常", "终端电阻问题"]
+  }
+}

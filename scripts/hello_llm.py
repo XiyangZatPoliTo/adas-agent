@@ -1,4 +1,4 @@
-from adas_agent.llm import get_llm
+from BFF_Bot.llm import get_llm
 
 llm = get_llm()
 response = llm.invoke("用一句话解释什么是 ADAS 功能降级。")

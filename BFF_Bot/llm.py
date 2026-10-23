@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 
-from adas_agent.config import get_setting
+from BFF_Bot.config import get_setting
 
 
 def get_llm(temperature: float = 0.0) -> ChatOpenAI:
@@ -10,6 +10,7 @@ def get_llm(temperature: float = 0.0) -> ChatOpenAI:
         base_url=get_setting("LLM_BASE_URL"),
         temperature=temperature,
     )
+
 
 
 
