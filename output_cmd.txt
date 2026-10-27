@@ -1,0 +1,40 @@
+行数: 299
+列: ['Index', 'Time', 'Timestamp', 'Count', 'Ecuid', 'Apid', 'Ctid', 'SessionId', 'Type', 'Subtype', 'Mode', '#Args', 'Payload']
+
+[1] 各 ECU 的 Timestamp 范围(rows_ts0 = Timestamp 为 0 的行数)
+       rows  rows_ts0      ts_min      ts_max
+Ecuid
+IPNM     17        14  14725.4245  14725.4444
+IPNP    271         0   2129.9621   2130.0612
+SRR5     11         0     51.1638     52.0041
+
+[2] Time 列共有 2 个不同取值,示例: ['30:04.1', '30:04.2']
+
+[3] 级别(Subtype) x 模式(Mode)
+Mode      non-verbose  verbose
+Subtype
+(none)            134        0
+debug               5        6
+error               4        9
+info               18      119
+response            1        0
+warn                0        3
+
+    Payload 形态占比
+kind
+binary     161
+text       137
+control      1
+
+[4] 文本消息 Top10 模板
+Subtype                                                                                   template  count
+   info                                                 EventID: <N> | nmea - <N> | $INIMU,<N>,<N>      9
+   info      EventID: <N> | nmea - <N> | $GPIMU,<N>,<N>,<N>,-<N>,<N>,-<N>,<N>,-<N>,<N>,<N>,<N>,<N>      7
+   info       EventID: <N> | nmea - <N> | $GPIMU,<N>,<N>,<N>,<N>,<N>,-<N>,<N>,-<N>,<N>,<N>,<N>,<N>      4
+   info            EventID: <N> | trace - <N> | <N> <N> <N> <N> d<N> d<N> c<N> <N> <N> <N> <N> <N>      4
+  debug                                            EventID: <N> | nmea - <N> | $GPLLA,<N>,<N>,-<N>      3
+  error             Schd : StartCyclicExecutable: Can't update cycle_timer - TearDown in progress?      2
+  error                                                            Schd : ChainStartAction - start      2
+   info <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>, <N>,       2
+   info                                                             AvpApp ResourceAvailable = <N>      2
+  error                                         Schd : ChainEndAction - reseting internal states..      2

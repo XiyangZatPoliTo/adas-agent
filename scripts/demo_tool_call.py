@@ -6,7 +6,7 @@ from BFF_Bot.llm import get_llm
 from BFF_Bot.prompts import SYSTEM_PROMPT
 from BFF_Bot.tools.registry import ALL_TOOLS, TOOLS_BY_NAME
 
-QUESTION = "车辆报了故障码 C1A03,这是什么意思?会影响哪些功能?"
+QUESTION = "故障码X9999表示什么意思？"
 
 llm = get_llm().bind_tools(ALL_TOOLS)
 
