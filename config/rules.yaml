@@ -1,0 +1,18 @@
+# 事件识别规则:真实日志格式变化时,只改这个文件,不改代码。
+# 每个类别 = 一组正则(使用命名分组 ?P<name>,分组名就是抽取出的字段名)
+rules:
+  sensor_status:            # 传感器状态
+    patterns:
+      - '(?P<sensor>Rdr|Cam) : (?:link|image) status = (?P<status>\w+)'
+    normal_field: status    # 哪个字段表示"是否正常"
+    normal_values: [OK]     # 这些取值视为正常,其余视为异常
+  dtc_set:                  # 故障码置位
+    patterns:
+      - 'DTC set , code = (?P<code>[A-Z]\d[0-9A-F]{3}) , status = (?P<dtc_status>\w+)'
+  function_state:           # 功能状态变化(不同模块措辞不统一,所以有多条正则)
+    patterns:
+      - '(?P<func>Acc|Lka) : state change \w+ -> (?P<state>\w+) , reason = (?P<reason>\S+)'
+      - '(?P<func>Aeb);State=(?P<state>\w+);Reason=(?P<reason>\S+)'
+  driver_action:            # 驾驶员操作
+    patterns:
+      - 'button = (?P<button>\w+) ; source = (?P<source>\w+)'
