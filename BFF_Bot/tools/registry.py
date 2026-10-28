@@ -7,6 +7,8 @@ from BFF_Bot.analysis.pipeline import analyze_window
 from BFF_Bot.loaders.dlt_csv import load_dlt_csv
 from BFF_Bot.tools.dtc import lookup_dtc
 
+from BFF_Bot.rag.store import search as kb_search
+
 LOG_DIR = Path(__file__).resolve().parents[2] / "data" / "logs"
 
 
@@ -44,6 +46,22 @@ def analyze_log_window(log_file: str, note_time: str) -> dict:
         return {"error": f"时间格式无法识别: {note_time},请使用 YYYY-MM-DD HH:MM:SS.mmm"}
     return analyze_window(load_dlt_csv(path), note_time)
 
+@tool
+def search_knowledge(query: str) -> dict:
+    """在 ADAS 知识库中检索故障原因、排查步骤等经验文档。
+    需要给出排查建议或解释故障现象时使用;查询词建议包含故障码和现象。
 
-ALL_TOOLS = [lookup_dtc_tool, analyze_log_window]
+    Args:
+        query: 检索问题,例如 "C1A01 雷达通信丢失 排查步骤"
+    """
+    try:
+        results = kb_search(query, k=3)
+    except Exception as e:  # 索引未建或 Embedding 服务异常时,回传原因而不是崩溃
+        return {"error": f"知识库检索失败: {type(e).__name__}: {e}"}
+    if not results:
+        return {"results": [], "note": "知识库为空或尚未建立索引(请先运行 python -m scripts.kb build)"}
+    return {"results": results}
+
+
+ALL_TOOLS = [lookup_dtc_tool, analyze_log_window, search_knowledge]
 TOOLS_BY_NAME = {t.name: t for t in ALL_TOOLS}
