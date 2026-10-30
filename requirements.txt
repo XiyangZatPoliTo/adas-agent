@@ -8,3 +8,4 @@ pyyaml
 langchain-chroma 
 langchain-text-splitters
 langgraph
+streamlit

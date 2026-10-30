@@ -13,6 +13,9 @@ from BFF_Bot.graph.workflow import build_graph
 
 app = FastAPI(title="BFF Bot - ADAS 降级根因分析", version="0.1.0")
 
+from BFF_Bot.rag.qa import answer_question
+
+
 _graph = None
 
 
@@ -41,6 +44,7 @@ class AnalyzeResponse(BaseModel):
     confidence: str | None = None
     report: str | None = None
     confirmation: dict | None = None  # 等待人工确认时,给人看的问题和系统判断
+    evidence: dict | None = None # 完整证据包：界面用它展示证据链（等待确认时也能看到）
 
 
 def _cfg(thread_id: str) -> dict:
@@ -52,9 +56,9 @@ def _to_response(graph, cfg, thread_id: str) -> AnalyzeResponse:
     ev = st.values.get("evidence") or {}
     if st.next:  # next 非空 = 图停在人工确认节点
         return AnalyzeResponse(thread_id=thread_id, status="awaiting_confirmation",
-                               verdict=ev.get("verdict"), confirmation=st.tasks[0].interrupts[0].value)
+                               verdict=ev.get("verdict"), confirmation=st.tasks[0].interrupts[0].value, evidence=ev or None)
     return AnalyzeResponse(thread_id=thread_id, status="completed", verdict=ev.get("verdict"),
-                           confidence=ev.get("confidence"), report=st.values.get("report"))
+                           confidence=ev.get("confidence"), report=st.values.get("report"), evidence=ev or None)
 
 
 @app.get("/health")
@@ -85,3 +89,23 @@ def confirm(thread_id: str, req: ConfirmRequest, graph=Depends(get_graph)):
         raise HTTPException(status_code=409, detail="该任务不在等待确认状态(可能已完成)")
     graph.invoke(Command(resume="yes" if req.confirmed else "no"), cfg)
     return _to_response(graph, cfg, thread_id)
+
+
+class AskRequest(BaseModel):
+    # 长度限制:拦截空问题和超长输入(超长输入既浪费费用,也是提示词注入的常见入口)
+    question: str = Field(..., min_length=2, max_length=500, examples=["摄像头被冰遮住了,怎么排查?"])
+
+
+class AskResponse(BaseModel):
+    answer: str
+    retrieved: list[dict]
+
+
+def get_qa_llm():
+    """依赖注入点:生产环境返回 None(使用默认模型),测试替换为假模型。"""
+    return None
+
+
+@app.post("/ask", response_model=AskResponse)
+def ask(req: AskRequest, llm=Depends(get_qa_llm)):
+    return answer_question(req.question, llm=llm)

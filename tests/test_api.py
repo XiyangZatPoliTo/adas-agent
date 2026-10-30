@@ -67,3 +67,8 @@ def test_bad_time_is_422(client):
 
 def test_missing_field_is_422(client):
     assert client.post("/analyze", json={}).status_code == 422  # 由 Pydantic 自动校验
+
+
+def test_response_includes_evidence(client):
+    j = client.post("/analyze", json=body("c1.csv", "case_01_radar_comm_loss")).json()
+    assert j["evidence"]["findings"][0]["dtc"] == "C1A01"
