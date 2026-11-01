@@ -3,3 +3,4 @@ case_01_radar_comm_loss.csv,2026-01-15 14:01:14.000,"ACC 突然降级,仪表有�
 case_02_camera_blocked.csv,2026-01-15 14:00:52.000,车道保持功能不可用 / LKA unavailable
 case_03_camera_calib_error.csv,2026-01-15 14:00:15.000,启动后 LKA 与 ACC 均不可用 / LKA and ACC unavailable after start
 case_04_driver_cancel_acc.csv,2026-01-15 14:01:01.500,ACC 突然退出 / ACC suddenly exited
+case_05_insufficient_evidence.csv,2026-01-15 14:00:32.000,LKA 短暂不可用 / LKA briefly unavailable

@@ -131,6 +131,11 @@ CASES = {
         fault=None, driver_cancel_ms=60_000,
         note_ms=61_500, note="ACC 突然退出 / ACC suddenly exited",
     ),
+    # 证据不足:测试员有反馈,但日志里没有任何规则能识别的事件,只有一条陌生消息
+    "case_05_insufficient_evidence": dict(
+        fault=None, decoys=[(30_000, "Lane : module reinit , reason = unknown")],
+        note_ms=32_000, note="LKA 短暂不可用 / LKA briefly unavailable",
+    ),
 }
 
 
@@ -146,7 +151,7 @@ def build_case(cfg):
     rows = noise_rows(sensor_faults)
     if fault:
         rows += fault_rows(fault)
-    else:
+    elif "driver_cancel_ms" in cfg:
         c = cfg["driver_cancel_ms"]
         rows.append(row(c, "CTL1", "HMI", "Btn", "info", "Hmi : button = ACC_cancel ; source = steering_wheel"))
         rows.append(row(c + 80, "CTL1", "FUNC", "ACC", "info", change_msg("ACC", DEACTIVATE, "driver_request")))
