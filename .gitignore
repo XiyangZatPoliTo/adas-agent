@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 data/raw/
 data/index
+data/matrix/*.xlsx
+data/matrix/dtc_matrix.json

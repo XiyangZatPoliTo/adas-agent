@@ -1,0 +1,18 @@
+# 矩阵列名映射:左边是标准字段,右边是矩阵里的实际列名。真实矩阵列名不同,只改这个文件。
+columns:
+  code: dtc
+  name: fault_name
+  module: diag_module
+  maturity: maturity_condition
+  permanent: is_permanent
+  category: category
+# 每个功能一列,单元格表示该故障对该功能的影响
+function_columns: [ACC, AEB, LKA, LDW]
+# 单元格原始取值 -> 标准取值(比较时已转小写、去空格)。不在表里的取值会被标成 unknown。
+effect_map:
+  degrade: degrade
+  降级: degrade
+  deactivate: deactivate
+  不激活: deactivate
+  none: none
+  "": none
