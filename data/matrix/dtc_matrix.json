@@ -1,0 +1,97 @@
+{
+  "v1.0": {
+    "C1A01": {
+      "name": "Front radar link lost",
+      "module": "Radar diag",
+      "maturity": "link timeout > 500 ms",
+      "permanent": true,
+      "category": "FuSa",
+      "effects": {
+        "ACC": "degrade",
+        "AEB": "degrade",
+        "LKA": "none",
+        "LDW": "none"
+      }
+    },
+    "C1A02": {
+      "name": "Front camera blocked",
+      "module": "Camera diag",
+      "maturity": "low image quality > 3 s",
+      "permanent": false,
+      "category": "Platform",
+      "effects": {
+        "ACC": "none",
+        "AEB": "degrade",
+        "LKA": "degrade",
+        "LDW": "none"
+      }
+    },
+    "C1A03": {
+      "name": "Front camera calibration out of range",
+      "module": "Camera diag",
+      "maturity": "calibration check failed",
+      "permanent": true,
+      "category": "Platform",
+      "effects": {
+        "ACC": "degrade",
+        "AEB": "none",
+        "LKA": "degrade",
+        "LDW": "none"
+      }
+    }
+  },
+  "v2.0": {
+    "C1A01": {
+      "name": "Front radar link lost",
+      "module": "Radar diag",
+      "maturity": "link timeout > 300 ms",
+      "permanent": true,
+      "category": "FuSa",
+      "effects": {
+        "ACC": "degrade",
+        "AEB": "degrade",
+        "LKA": "none",
+        "LDW": "none"
+      }
+    },
+    "C1A02": {
+      "name": "Front camera blocked",
+      "module": "Camera diag",
+      "maturity": "low image quality > 3 s",
+      "permanent": false,
+      "category": "Platform",
+      "effects": {
+        "ACC": "none",
+        "AEB": "degrade",
+        "LKA": "degrade",
+        "LDW": "degrade"
+      }
+    },
+    "C1A03": {
+      "name": "Front camera calibration out of range",
+      "module": "Camera diag",
+      "maturity": "calibration check failed",
+      "permanent": true,
+      "category": "Platform",
+      "effects": {
+        "ACC": "degrade",
+        "AEB": "none",
+        "LKA": "degrade",
+        "LDW": "none"
+      }
+    },
+    "C1A04": {
+      "name": "Front radar blockage suspected",
+      "module": "Radar diag",
+      "maturity": "detection range reduced > 5 s",
+      "permanent": false,
+      "category": "Platform",
+      "effects": {
+        "ACC": "degrade",
+        "AEB": "degrade",
+        "LKA": "none",
+        "LDW": "none"
+      }
+    }
+  }
+}
