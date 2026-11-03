@@ -1,0 +1,11 @@
+- {q: "雷达掉线怎么排查", expect: radar_comm_loss.md}
+- {q: "ACC 和 AEB 同时降级,雷达链路状态是通信丢失", expect: radar_comm_loss.md}
+- {q: "C1A01 是什么原因", expect: radar_comm_loss.md}
+- {q: "雷达供电不稳定会有什么现象", expect: radar_comm_loss.md}
+- {q: "摄像头被冰遮住了怎么排查", expect: camera_blockage_and_calibration.md}
+- {q: "换了挡风玻璃之后 LKA 不能用", expect: camera_blockage_and_calibration.md}
+- {q: "C1A03 标定异常怎么处理", expect: camera_blockage_and_calibration.md}
+- {q: "低温天气图像质量下降", expect: camera_blockage_and_calibration.md}
+- {q: "发动机漏油怎么办", expect: null}
+- {q: "今天天气怎么样", expect: null}
+- {q: "怎么给手机充电", expect: null}

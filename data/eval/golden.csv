@@ -1,0 +1,6 @@
+log_file,note_time,expected_verdict,expected_dtc,expected_funcs
+case_01_radar_comm_loss.csv,2026-01-15 14:01:14.000,fault_chain,C1A01,ACC;AEB
+case_02_camera_blocked.csv,2026-01-15 14:00:52.000,fault_chain,C1A02,AEB;LKA
+case_03_camera_calib_error.csv,2026-01-15 14:00:15.000,fault_chain,C1A03,ACC;LKA
+case_04_driver_cancel_acc.csv,2026-01-15 14:01:01.500,driver_action,,
+case_05_insufficient_evidence.csv,2026-01-15 14:00:32.000,inconclusive,,
